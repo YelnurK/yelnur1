@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="StylesHome.css">
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="search-bar">
+                    <input type="text" id="search-input" placeholder="Search...">
+                    <button id="search-button">Search</button>
+                    <div class="spacer"></div>
+                </div>
+                <div class="spacer"></div>
+                <button id="about-button">About Me</button>
+                <div class="spacer"></div>
+                <button id="login-button"><a href="login.html">Log In</a></button>
+                <div class="spacer"></div>
+                <button id="view-profile"><a href="profile.php">Profile</a></button>
+                <div class="spacer"></div>
+                <button id="sort-button">Sort</button>
+                <button id="dark-mode-toggle">Dark Mode</button>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="search-results">
+            <!-- Results will be displayed here -->
+        </div>
+        <section id="js-content" class="content">
+            <h2><a href="jsuchilka.html">JavaScript</a></h2>
+            <p>Welcome to the JavaScript section!</p>
+        </section>
+        <section id="html-content" class="content">
+            <h2><a href="htmlka.html">HTML</a></h2>
+            <p>Welcome to the HTML section!</p>
+        </section>
+        <section id="css-content" class="content">
+            <h2><a href="CSSSTYLES.html">CSS</a></h2>
+            <p>Welcome to the CSS section!</p>
+        </section>
+    </main>
+    <footer>
+        <section id="contact-info">
+            <h3>Contact Me</h3>
+            <a style="color: #ac2bac;" href="" role="button"><i class="fab fa-instagram"></i></a>
+        </section>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('sort-button').addEventListener('click', function() {
+        const sections = document.querySelectorAll('.content');
+        const sortedSections = Array.from(sections).sort((a, b) => a.id.localeCompare(b.id));
+    
+        const main = document.querySelector('main');
+        sortedSections.forEach(section => main.appendChild(section));
+        });
+    </script>
+    <script>
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        const main = document.querySelector('main');
+    
+        // Check if dark mode is enabled in local storage
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            enableDarkMode();
+        }
+    
+        darkModeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            header.classList.toggle('dark-mode');
+            footer.classList.toggle('dark-mode');
+            main.classList.toggle('dark-mode');
+            
+            const currentMode = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+            darkModeToggle.textContent = currentMode;
+            
+            // Store the current mode in local storage
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+    
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            header.classList.add('dark-mode');
+            footer.classList.add('dark-mode');
+            main.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Light Mode';
+        }
+    </script>
+     <script>
+        document.getElementById("search-button").addEventListener("click", function() {
+            var searchInput = document.getElementById("search-input").value.toLowerCase();
+            var sections = document.getElementsByClassName("content");
+
+            for (var i = 0; i < sections.length; i++) {
+                var section = sections[i];
+                var sectionText = section.textContent.toLowerCase();
+
+                if (sectionText.includes(searchInput)) {
+                    section.style.display = "block";
+                } else {
+                    section.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

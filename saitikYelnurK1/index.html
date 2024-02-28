@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Sign up form </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        function validatePassword() {
+            const pass = document.getElementById('pass').value;
+            const repass = document.getElementById('repass').value;
+            const passwordError = document.getElementById('passwordError');
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+            if (!pass.match(passwordRegex)) {
+                passwordError.textContent = 'Password should contain at least 8 symbols, 1 number, and 1 uppercase letter';
+                return false;
+            } else if (pass !== repass) {
+                passwordError.textContent = 'Passwords do not match';
+                return false;
+            } else {
+                passwordError.textContent = '';
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!email.match(emailRegex)) {
+                alert('Please enter a valid email address');
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function validateForm() {
+            return validatePassword() && validateEmail();
+        }
+    </script>
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1>Sign Up</h1>
+        <form action="signup.php" method="post" onsubmit="return validateForm() ">
+            <input id='username' type="text" name="username" placeholder="Username">
+            <input id='email' type="text" name="email" placeholder="Email">
+            <input id='pass' type="password" name="pass" placeholder="Password">
+            <input id='repass' type="password" name="repass" placeholder="Re-Enter Password">
+            <input id='submit' type="submit" name="signup" value="Sign up">
+            <span id="passwordError" class="error"></span>
+        </form>
+        <div class="terms">
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">I agree to these <a href="#">Terms & Conditions</a></label>
+        </div>
+        
+            <!-- <a class="buttona" href="homepage.html">Sign Up</a> -->
+            <!-- <input type="submit" class="buttona" name="signup" value="Sign up"> -->
+        
+        <div class="member">
+            Already a member? <a href="login.html">
+                Login Here
+            </a>
+        </div>
+    </div>
+</body>
+</html>
